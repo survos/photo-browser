@@ -1,0 +1,168 @@
+easy_admin:
+    disabled_actions: ['delete']
+    list:
+        actions: ['show', 'edit']
+        title: 'list.%%entity_label%%'
+    show:
+        title: '%%entity_label%% (#%%entity_id%%)'
+    entities:
+       VideoMetadata:
+          class: App\Entity\VideoMetadata
+          list:
+            fields:
+                            - imageid
+                            - aspectRatio
+                            - audioBitRate
+                            - audioChannelType
+                            - audioCompressor
+                            - duration
+                            - frameRate
+                            - exposureProgram
+                            - videoCodec
+            
+       Tags:
+          class: App\Entity\Tags
+          list:
+            fields:
+                            - id
+                            - pid
+                            - name
+                            - icon
+                            - iconkde
+                            - images
+
+            
+       Searches:
+          class: App\Entity\Searches
+          list:
+            fields:
+                            - id
+                            - type
+                            - name
+                            - query
+            
+       Image:
+          class: App\Entity\Image
+          list:
+            fields:
+                            - id
+                            - urlPath
+                            - album
+                            - name
+                            - status
+                            - category
+                            - tags
+                            - meta
+                            - location
+
+       ImagePositions:
+          class: App\Entity\ImagePositions
+          list:
+            fields:
+                            - imageid
+                            - latitude
+                            - latitudeNumber
+                            - longitude
+                            - longitudeNumber
+                            - altitude
+                            - orientation
+                            - tilt
+                            - roll
+                            - accuracy
+                            - description
+            
+       ImageMetadata:
+          class: App\Entity\ImageMetadata
+          list:
+            fields:
+                            - imageid
+                            - make
+                            - model
+                            - lens
+                            - aperture
+                            - focalLength
+                            - focalLength35
+                            - exposureTime
+                            - exposureProgram
+                            - exposureMode
+                            - sensitivity
+                            - flash
+                            - whiteBalance
+                            - whiteBalanceColorTemperature
+                            - meteringMode
+                            - subjectDistance
+                            - subjectDistanceCategory
+            
+
+       ImageHistory:
+          class: App\Entity\ImageHistory
+          list:
+            fields:
+                            - imageid
+                            - uuid
+                            - history
+            
+       ImageHaarMatrix:
+          class: App\Entity\ImageHaarMatrix
+          list:
+            fields:
+                            - imageid
+                            - modificationDate
+                            - uniqueHash
+                            - matrix
+            
+       ImageCopyright:
+          class: App\Entity\ImageCopyright
+          list:
+            fields:
+                            - id
+                            - imageid
+                            - property
+                            - value
+                            - extraValue
+            
+       ImageComments:
+          class: App\Entity\ImageComments
+          list:
+            fields:
+                            - id
+                            - imageid
+                            - type
+                            - language
+                            - author
+                            - date
+                            - comment
+            
+       DownloadHistory:
+          class: App\Entity\DownloadHistory
+          list:
+            fields:
+                            - id
+                            - identifier
+                            - filename
+                            - filesize
+                            - filedate
+            
+       Albums:
+          class: App\Entity\Albums
+          list:
+            fields:
+                            - id
+                            - albumRoot
+                            - relativePath
+                            - date
+                            - caption
+                            - collection
+                            - icon
+            
+       AlbumRoots:
+          class: App\Entity\AlbumRoots
+          list:
+            fields:
+                            - id
+                            - label
+                            - status
+                            - type
+                            - identifier
+                            - specificPath
+            

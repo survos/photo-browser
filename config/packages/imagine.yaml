@@ -1,0 +1,94 @@
+liip_imagine:
+    resolvers:
+        default:
+            web_path:
+                web_root: "%kernel.project_dir%/public"
+                cache_prefix: "images/cache"
+    loaders:
+        default:
+            filesystem:
+                # data_root: "%kernel.project_dir%/public"
+                # data_root: "%kernel.project_dir%/public/photos"
+                data_root: "/"
+
+    cache:                default
+    data_loader:          default
+    default_image:        null
+#    controller:
+#        filter_action:         liip_imagine.controller:filterAction
+#        filter_runtime_action: liip_imagine.controller:filterRuntimeAction
+
+
+     # valid drivers options include "gd" or "gmagick" or "imagick"
+    driver: "gd"
+
+     # define your filter sets under this option
+    filter_sets:
+        cache: ~
+
+       # an example thumbnail transformation definition
+       # https://symfony.com/doc/current/bundles/LiipImagineBundle/basic-usage.html#create-thumbnails
+        squared_thumbnail:
+
+           # set your image quality defaults
+           jpeg_quality:          85
+           png_compression_level: 8
+
+           # setup the filter steps to apply for this transformation
+           filters:
+
+               # auto rotate the image using EXIF metadata
+               auto_rotate: ~
+
+               # strip the image of all metadata
+               strip: ~
+
+               # scale and square the image to the given dimensions
+               thumbnail:
+                   size:          [220, 220]
+                   mode:          outbound
+                   allow_upscale: true
+
+               # create border by placing image on larger black background
+               background:
+                   size:     [256, 256]
+                   position: center
+                   color:    '#fff'
+
+        # name our first filter set "my_heighten_filter"
+        my_heighten_filter:
+            filters:
+
+                # use and setup the "relative_resize" filter
+                relative_resize:
+
+                    # given 50x40px, output 75x60px using "heighten" option
+                    heighten: 120
+
+        # name our second filter set "my_widen_filter"
+        my_widen_filter:
+            filters:
+                auto_rotate: ~
+                # use and setup the "relative_resize" filter
+                relative_resize:
+                    widen: 120
+
+        # name our second filter set "my_increase_filter"
+        my_increase_filter:
+            filters:
+
+                # use and setup the "relative_resize" filter
+                relative_resize:
+
+                    # given 50x40px, output 60x50px, using "increase" option
+                    increase: 10
+
+        # name our second filter set "my_scale_filter"
+        my_scale_filter:
+            filters:
+
+                # use and setup the "relative_resize" filter
+                relative_resize:
+
+                    # given 50x40px, output 125x100px using "scale" option
+                    scale: 2.5

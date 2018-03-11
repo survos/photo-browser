@@ -1,0 +1,9 @@
+rezzza_flickr:
+    key: '%env(resolve:REZZZA_FLICKR_KEY)'
+    secret: '%env(resolve:REZZZA_FLICKR_SECRET)'
+
+#flickr:
+#    consumer_key: 5dc85891c4d74a63260b589f37a533d7
+#    consumer_secret: 14a296ed7b3bed99
+#    token: 72157691834157121-7b7fcc7b60a9f4c2
+#    token_secret: 35adb50a8eb6f8e7
