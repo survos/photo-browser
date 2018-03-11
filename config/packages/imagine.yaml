@@ -58,6 +58,7 @@ liip_imagine:
         # name our first filter set "my_heighten_filter"
         my_heighten_filter:
             filters:
+                auto_rotate: ~
 
                 # use and setup the "relative_resize" filter
                 relative_resize:

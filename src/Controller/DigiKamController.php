@@ -19,8 +19,37 @@ class DigiKamController extends Controller
     private function getConnection(): Connection
     {
         /** @var Connection $connection */
-        return $this->getDoctrine()->getConnection('default');
+        return $this->getDoctrine()->getConnection('thumb');
     }
+
+    /**
+     * @Route("/thumb/{id}", name="dk_thumb")
+     */
+    public function thumb(Connection $connection, $id)
+    {
+        $connection = $this->getConnection();
+        $r = $connection->executeQuery("select * from Thumbnails where id = $id")->fetch();
+        dump($r); die();
+
+        if ($r) {
+            $response = new Response();
+            // $response->headers->set('Content-type', mime_content_type($path));
+            // $response->headers->set('Content-length', filesize($path));
+            $response->sendHeaders();
+            $response->setContent($r['data']);
+            return $response;
+        } else {
+            throw new NotFoundHttpException("No path for $path");
+        }
+
+
+
+        return $this->render("dk/albumRoots.html.twig", ['albumRoots' =>
+            $this->getDoctrine()->getRepository(AlbumRoots::class)->findAll()
+        ]);
+
+    }
+
 
     /**
      * @Route("/roots", name="digi_kam")
@@ -115,6 +144,7 @@ class DigiKamController extends Controller
     public function showJpeg(Image $image)
     {
         $root = $this->getParameter('image_root');
+
 
         $path = $image->getFilePath();
         if (file_exists($path)) {

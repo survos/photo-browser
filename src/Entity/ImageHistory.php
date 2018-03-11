@@ -32,11 +32,18 @@ private $uuid;
 */
 private $history;
 
-    public function getHistory() { return $this->history; }
+    public function getHistoryXml() {
+        return $this->history;
+    }
+
+    public function getHistoryArray() {
+        $xml = simplexml_load_string($this->getHistoryXml());
+        return json_decode(json_encode($xml), true);
+    }
 
 
 public function __toString(): string
 {
-      return $this->name;
+      return $this->getUuid();
 }
 }

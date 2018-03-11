@@ -60,6 +60,13 @@ private $album;
     private $meta;
 
     /**
+     * @ORM\OneToOne(targetEntity="App\Entity\ImageHistory", fetch="EAGER")
+     * @ORM\JoinColumn(name="id", referencedColumnName="imageid")
+     */
+
+    private $history;
+
+    /**
      * @ORM\OneToOne(targetEntity="App\Entity\ImagePositions")
      * @ORM\JoinColumn(name="id", referencedColumnName="imageid")
      */
@@ -120,6 +127,12 @@ private $album;
         return $this;
     }
 
+    public function getHistory() {
+        $h = $this->getImageHistory()->getHistoryArray();
+
+        dump($h);
+        return $h;
+    }
 
 
     public function getAlbum(): Albums { return $this->album; }
@@ -171,6 +184,43 @@ public function __toString(): string
 {
       return $this->name;
 }
+
+    /**
+     * @return mixed
+     */
+    public function getInformation()
+    {
+        return $this->information;
+    }
+
+    /**
+     * @param mixed $information
+     * @return Image
+     */
+    public function setInformation($information)
+    {
+        $this->information = $information;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getImageHistory(): ImageHistory
+    {
+        return $this->history;
+    }
+
+    /**
+     * @param mixed $history
+     * @return Image
+     */
+    public function setHistory($history)
+    {
+        $this->history = $history;
+        return $this;
+    }
+
 
 public function getUrlPath()
 {
