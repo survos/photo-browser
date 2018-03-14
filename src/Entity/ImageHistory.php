@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Repository\ImageRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -35,12 +36,6 @@ private $history;
     public function getHistoryXml() {
         return $this->history;
     }
-
-    public function getHistoryArray() {
-        $xml = simplexml_load_string($this->getHistoryXml());
-        return json_decode(json_encode($xml), true);
-    }
-
 
 public function __toString(): string
 {

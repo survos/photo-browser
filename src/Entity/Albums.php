@@ -4,8 +4,10 @@ namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use ApiPlatform\Core\Annotation\ApiResource;
 
 /**
+ * @ApiResource()
 * @ORM\Entity(repositoryClass="App\Repository\AlbumsRepository")
 * @ORM\Table(name="Albums")
 */
@@ -36,7 +38,7 @@ private $albumRoot;
     public function getAlbumroot(): AlbumRoots { return $this->albumRoot; }
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Image", mappedBy="album")
+     * @ORM\OneToMany(targetEntity="App\Entity\Image", mappedBy="album", fetch="EAGER")
      */
     private $images;
     public function getImages() { return $this->images; }

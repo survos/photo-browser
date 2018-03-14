@@ -5,6 +5,8 @@ namespace App\Controller;
 use App\Entity\AlbumRoots;
 use App\Entity\Albums;
 use App\Entity\Image;
+use App\Repository\ImageRepository;
+use App\Service\ImageService;
 use Doctrine\DBAL\Connection;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -111,7 +113,7 @@ class DigiKamController extends Controller
     /**
      * @Route("/album/{albumId}", name="dk_album")
      */
-    public function showAlbum(Request $request, $albumId)
+    public function showAlbum(Request $request, $albumId, ImageRepository $imageRepository)
     {
         $album = $this->getDoctrine()->getRepository(Albums::class)->find($albumId);
         $albumRoot = $album->getAlbumroot();
@@ -120,14 +122,25 @@ class DigiKamController extends Controller
             ->addRouteItem($album, 'dk_album', $album->getRp());
 
 
-        return $this->render("dk/album.html.twig", ['album' => $album ]);
+        $imagesQuery = $imageRepository->createQueryBuilder('i')
+            ->join('i.meta', 'meta')
+            ->andWhere('i.album = :album')
+            ->setParameter('album', $album);
+
+
+
+        return $this->render("dk/album.html.twig", [
+            'album' => $album,
+            'images' => $imagesQuery->getQuery()->getResult()
+            ]);
     }
 
     /**
      * @Route("/image/{id}", name="dk_image")
      */
-    public function showImage(Image $image)
+    public function showImage(Image $image, ImageService $service)
     {
+        $history  = $service->getHistory($image);
         $album = $image->getAlbum();
         $albumRoot = $album->getAlbumroot();
         $this->setBreadcrumbs()
@@ -135,7 +148,10 @@ class DigiKamController extends Controller
             ->addRouteItem($album, 'dk_album', $album->getRp())
             ->addItem($image);
 
-        return $this->render("dk/image.html.twig", ['image' => $image]);
+        return $this->render("dk/image.html.twig", [
+            'image' => $image,
+            'history' => $history
+        ]);
     }
 
     /**

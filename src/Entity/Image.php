@@ -14,7 +14,9 @@ class Image extends BaseEntity
 
     public function __construct()
     {
-        $this->tags= new ArrayCollection();
+        $this->tags = new ArrayCollection();
+        $this->subjects = new ArrayCollection();
+        $this->objects = new ArrayCollection();
     }
 
 /**
@@ -52,9 +54,38 @@ private $album;
 
     private $information;
 
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Image", mappedBy="objects")
+     * @ORM\JoinTable(name="ImageRelations",
+     *      joinColumns={@ORM\JoinColumn(name="object", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="subject", referencedColumnName="id")}
+     *      )
+     */
+    private $objects;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Image", mappedBy="subjects")
+     * @ORM\JoinTable(name="ImageRelations",
+     *      joinColumns={@ORM\JoinColumn(name="subject", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="object", referencedColumnName="id")}
+     *      )
+     */
+    private $subjects;
+
+    // ...
+
+
+    /**
+     * @ ORM\OneToMany(targetEntity="App\Entity\ImageRelations")
+     * @ ORM\JoinColumn(name="id", referencedColumnName="subject")
+
+    private $subjects; // subjectOf
+     */
+
     /**
      * @ORM\OneToOne(targetEntity="App\Entity\ImageMetadata", fetch="EAGER")
-     * @ORM\JoinColumn(name="id", referencedColumnName="imageid")
+     * @ORM\JoinColumn(name="id", referencedColumnName="imageid", nullable=true)
      */
 
     private $meta;
@@ -128,10 +159,16 @@ private $album;
     }
 
     public function getHistory() {
-        $h = $this->getImageHistory()->getHistoryArray();
-
-        dump($h);
+        $h = [];
+        if ($this->getImageHistory()) {
+            $h = $this->getImageHistory()->getHistoryArray();
+        }
         return $h;
+    }
+
+    public function isRaw(): bool
+    {
+        return $this->getInfo() ? substr($this->getInfo()->getFormat(), 0, 3) === 'RAW' : true;
     }
 
 
@@ -182,7 +219,7 @@ private $uniqueHash;
 
 public function __toString(): string
 {
-      return $this->name;
+      return sprintf("%d: %s", $this->getId(), $this->name);
 }
 
     /**
@@ -206,7 +243,7 @@ public function __toString(): string
     /**
      * @return mixed
      */
-    public function getImageHistory(): ImageHistory
+    public function getImageHistory(): ?ImageHistory
     {
         return $this->history;
     }
@@ -237,6 +274,43 @@ public function getUrlPath()
             'id' => $this->getId()
         ];
     }
+
+    /**
+     * @return mixed
+     */
+    public function getObjects()
+    {
+        return $this->objects;
+    }
+
+    /**
+     * @param mixed $objects
+     * @return Image
+     */
+    public function setObjects($objects)
+    {
+        $this->objects = $objects;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSubjects()
+    {
+        return $this->subjects;
+    }
+
+    /**
+     * @param mixed $subjects
+     * @return Image
+     */
+    public function setSubjects($subjects)
+    {
+        $this->subjects = $subjects;
+        return $this;
+    }
+
 
 
 }

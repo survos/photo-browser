@@ -35,6 +35,6 @@ private $type;
 
 public function __toString(): string
 {
-      return $this->name;
+      return $this->getSubject(); // really this should be the Image entity
 }
 }

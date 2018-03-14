@@ -37,6 +37,24 @@ class MainMenuBuilder
                     'icon' => 'fa fa-chess-bishop'
                 ],
             'route' => 'digi_kam'));
+
+        $menu->addChild('data_tables_page', array(
+            'extras' =>
+                [
+                    'icon' => 'fa fa-table'
+                ],
+            'route' => 'test_tables'));
+
+        $menu->addChild('api', array(
+            'extras' =>
+                [
+                    'icon' => 'fa fa-api'
+                ],
+            'route' => 'api_doc'))
+            ->setLinkAttributes(
+                array('target' => '_blank')
+        );
+
         return $menu;
         
     }
