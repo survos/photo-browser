@@ -1,0 +1,7 @@
+menu:
+    easyadmin:
+        label: EZ Admin
+    data_tables_page:
+        label: DataTables Example
+    api:
+        label: API (JSON-LD)

@@ -20,6 +20,11 @@ private $imageid;
 
     public function getImageid() { return $this->imageid; }
 
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Image", mappedBy="location")
+    protected $image;
+     */
+
 /**
 * @ORM\Column(type="text", name="latitude")
 */
@@ -93,6 +98,9 @@ private $description;
 
 public function __toString(): string
 {
-      return sprintf("%3.2f,%3.2f", $this->getLatitudenumber(), $this->getLongitudenumber());
+    if ($this->getLatitudenumber()) {
+        return sprintf("%3.2f,%3.2f", $this->getLatitudenumber(), $this->getLongitudenumber());
+    }
+    return '';
 }
 }

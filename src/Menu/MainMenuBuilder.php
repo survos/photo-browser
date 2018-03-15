@@ -38,6 +38,14 @@ class MainMenuBuilder
                 ],
             'route' => 'digi_kam'));
 
+        $menu->addChild('easyadmin', array(
+            'extras' =>
+                [
+                    'icon' => 'fa fa-admin'
+                ],
+            'route' => 'easyadmin'));
+
+
         $menu->addChild('data_tables_page', array(
             'extras' =>
                 [

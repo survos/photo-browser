@@ -61,8 +61,8 @@ private $album;
      *      joinColumns={@ORM\JoinColumn(name="object", referencedColumnName="id")},
      *      inverseJoinColumns={@ORM\JoinColumn(name="subject", referencedColumnName="id")}
      *      )
-     */
     private $objects;
+     */
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Image", mappedBy="subjects")
@@ -70,8 +70,8 @@ private $album;
      *      joinColumns={@ORM\JoinColumn(name="subject", referencedColumnName="id")},
      *      inverseJoinColumns={@ORM\JoinColumn(name="object", referencedColumnName="id")}
      *      )
-     */
     private $subjects;
+     */
 
     // ...
 
@@ -98,11 +98,11 @@ private $album;
     private $history;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\ImagePositions")
-     * @ORM\JoinColumn(name="id", referencedColumnName="imageid")
+     * @ORM\OneToOne(targetEntity="App\Entity\ImagePositions", orphanRemoval=true, fetch="EAGER")
+     * @ORM\JoinColumn(name="id", referencedColumnName="imageid", nullable=true)
      */
 
-    private $location;
+    private $location = null;
 
     /**
      * @return mixed

@@ -53,7 +53,7 @@ easy_admin:
                             - category
                             - tags
                             - meta
-                            - location
+#                            - location
 
        ImagePositions:
           class: App\Entity\ImagePositions
