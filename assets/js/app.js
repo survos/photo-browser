@@ -13,7 +13,7 @@ require('bootstrap-sass');
 $(document).ready(function() {
     $('.dataTables-basic').DataTable({
         responsive: true,
-        "scrollY":        "200px",
+        "scrollY":        "50vh",
         "scrollCollapse": true,
         "paging":         false
     });
@@ -21,3 +21,4 @@ $(document).ready(function() {
 
 
 // ...rest of JavaScript code here
+

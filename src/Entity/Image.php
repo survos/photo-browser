@@ -158,14 +158,6 @@ private $album;
         return $this;
     }
 
-    public function getHistory() {
-        $h = [];
-        if ($this->getImageHistory()) {
-            $h = $this->getImageHistory()->getHistoryArray();
-        }
-        return $h;
-    }
-
     public function isRaw(): bool
     {
         return $this->getInfo() ? substr($this->getInfo()->getFormat(), 0, 3) === 'RAW' : true;

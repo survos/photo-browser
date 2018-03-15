@@ -9,6 +9,7 @@
         "guzzle/http": "^3.9",
         "knplabs/knp-menu-bundle": "^2.0",
         "liip/imagine-bundle": "^2.0",
+        "nelmio/cors-bundle": "@dev",
         "phpoffice/phpspreadsheet": "^1.1",
         "rezzza/flickr": "*",
         "rezzza/flickr-bundle": "dev-tacman-patch-2",

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "800e2617bf814296aaa6c075105c2c9c",
+    "content-hash": "31533f5a41db6416f630e383a5107a46",
     "packages": [
         {
             "name": "api-platform/api-pack",
@@ -6236,6 +6236,7 @@
     "minimum-stability": "dev",
     "stability-flags": {
         "api-platform/api-pack": 20,
+        "nelmio/cors-bundle": 20,
         "rezzza/flickr-bundle": 20,
         "symfony/lts": 20,
         "whiteoctober/breadcrumbs-bundle": 20
