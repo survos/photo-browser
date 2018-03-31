@@ -13,6 +13,7 @@ class Settings
 
 /**
 * @ORM\Column(type="text", name="keyword")
+ * @ORM\Id()
 */
 private $keyword;
 
@@ -28,6 +29,6 @@ private $value;
 
 public function __toString(): string
 {
-      return $this->name;
+      return sprintf("%s: %s", $this->getKeyword(), $this->getValue());
 }
 }

@@ -12,13 +12,21 @@ class ImagePositions
 {
 
 /**
-* @ORM\Column(type="integer", name="imageid")
-* @ORM\Id
-* @ORM\GeneratedValue
-*/
+* @ ORM\Column(type="integer", name="imageid")
+* @ ORM\Id
+* @ ORM\GeneratedValue
 private $imageid;
 
-    public function getImageid() { return $this->imageid; }
+public function getImageid() { return $this->imageid; }
+*/
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Image", inversedBy="location")
+     * @ORM\JoinColumn(name="imageid", referencedColumnName="id")
+     * @ORM\Id
+     */
+    private $image;
+
 
     /**
      * @ORM\OneToOne(targetEntity="App\Entity\Image", mappedBy="location")
@@ -103,4 +111,5 @@ public function __toString(): string
     }
     return '';
 }
+
 }

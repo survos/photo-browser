@@ -13,6 +13,7 @@ class TagsTree
 
 /**
 * @ORM\Column(type="integer", name="id")
+ * @ORM\Id()
 */
 private $id;
 
@@ -28,6 +29,6 @@ private $pid;
 
 public function __toString(): string
 {
-      return $this->name;
+      return $this->getId();
 }
 }

@@ -17,6 +17,8 @@ class Image extends BaseEntity
         $this->tags = new ArrayCollection();
         $this->subjects = new ArrayCollection();
         $this->objects = new ArrayCollection();
+        $this->location = null;
+        $this->meta = null;
     }
 
 /**
@@ -84,8 +86,14 @@ private $album;
      */
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\ImageMetadata", fetch="EAGER")
-     * @ORM\JoinColumn(name="id", referencedColumnName="imageid", nullable=true)
+     * @ORM\OneToOne(targetEntity="App\Entity\ImageMetadata", orphanRemoval=true, fetch="EAGER")
+     * @  ORM\JoinColumn(name="id", referencedColumnName="imageid", nullable=true)
+    private $meta = null;
+     */
+
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\ImageMetadata", mappedBy="image", orphanRemoval=true, fetch="EAGER")
      */
 
     private $meta;
@@ -98,10 +106,13 @@ private $album;
     private $history;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\ImagePositions", orphanRemoval=true, fetch="EAGER")
-     * @ORM\JoinColumn(name="id", referencedColumnName="imageid", nullable=true)
+     * @ ORM\OneToOne(targetEntity="App\Entity\ImagePositions", orphanRemoval=true, fetch="EAGER")
+     * @ ORM\JoinColumn(name="id", referencedColumnName="imageid", nullable=true)
      */
 
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\ImagePositions", mappedBy="image", orphanRemoval=true, fetch="EAGER")
+     */
     private $location = null;
 
     /**
@@ -164,7 +175,7 @@ private $album;
     }
 
 
-    public function getAlbum(): Albums { return $this->album; }
+    public function getAlbum(): ?Albums { return $this->album; }
 
 /**
 * @ORM\Column(type="string", name="name")
@@ -253,7 +264,7 @@ public function __toString(): string
 
 public function getUrlPath()
 {
-    return sprintf("%s/%s", $this->getAlbum()->getPath(), $this->getName());
+    return $this->getAlbum() ? sprintf("%s/%s", $this->getAlbum()->getPath(), $this->getName()) : '#';
 }
 
     public function getFilePath()

@@ -12,13 +12,20 @@ class ImageMetadata
 {
 
 /**
-* @ORM\Column(type="integer", name="imageid")
-* @ORM\Id
-* @ORM\GeneratedValue
-*/
+* @ ORM\Column(type="integer", name="imageid")
+* @ ORM\Id
+* @ ORM\GeneratedValue
 private $imageid;
 
     public function getImageid() { return $this->imageid; }
+ */
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Image", inversedBy="meta")
+     * @ORM\JoinColumn(name="imageid", referencedColumnName="id")
+     * @ORM\Id
+     */
+    private $image;
 
 /**
 * @ORM\Column(type="text", name="make")
@@ -140,5 +147,25 @@ public function __toString(): string
           round($exposure),
           $this->getAperture());
 }
+
+    /**
+     * @return mixed
+     */
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    /**
+     * @param mixed $image
+     * @return ImageMetadata
+     */
+    public function setImage($image)
+    {
+        $this->image = $image;
+        return $this;
+    }
+
+
 
 }

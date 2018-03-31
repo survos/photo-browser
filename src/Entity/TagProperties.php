@@ -13,6 +13,7 @@ class TagProperties
 
 /**
 * @ORM\Column(type="integer", name="tagid")
+* @ORM\Id()
 */
 private $tagid;
 
@@ -20,6 +21,7 @@ private $tagid;
 
 /**
 * @ORM\Column(type="text", name="property")
+ * @ORM\Id()
 */
 private $property;
 
