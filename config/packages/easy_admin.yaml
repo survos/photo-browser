@@ -53,7 +53,8 @@ easy_admin:
                             - category
                             - tags
                             - meta
-#                            - location
+                            # - { property: 'meta', type: 'string', label: 'Contact' }
+                            - location
 
        ImagePositions:
           class: App\Entity\ImagePositions

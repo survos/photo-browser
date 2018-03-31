@@ -1,0 +1,45 @@
+{% extends "base.html.twig"  %}
+
+{% block body %}
+
+    <h3>Album Roots</h3>
+    icon?
+    <i class="fa fa-plus">ICON</i>
+
+    <table class="table table-striped">
+        <tbody>
+
+        <h3>{{ albumRoots|length }} AlbumRoots</h3>
+        <thead>
+        <tr>
+            <th>Path</th>
+            <th>Status</th>
+            <th>Type</th>
+            <th>Album#</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        {% for a in albumRoots %}
+            <tr>
+                <td>
+                        <a class="btn btn-info" href="{{ path('dk_album_root', {albumRootId: a.id}) }}">{{ a.specificpath }}</a>
+                </td>
+                <td>{{ a.status }}</td>
+                <td>{{ a.type }}</td>
+                <td>{{ a.albums|length }}</td>
+                {#
+                <td>{{ a.date }}</td>
+                <td>{{ a.label }}</td>
+                <td>{{ a.caption }}</td>
+                <td>{{ a.relativePath }}</td>
+                #}
+                {% if app.request.get('debug', false) %}
+                <td>{{ dump(a) }}</td>
+                    {% endif %}
+            </tr>
+        {% endfor %}
+
+        </tbody>
+    </table>
+{% endblock %}

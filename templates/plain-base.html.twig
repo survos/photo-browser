@@ -1,0 +1,35 @@
+{# maybe someday, but not working now
+{% extends '@AvanzuAdminTheme/layout/default-layout.html.twig' %}
+
+{% block avanzu_logo_path path('digi_kam') %}
+
+{% block avanzu_page_content %}
+
+    {{ block('body') }}
+
+{% endblock %}
+#}
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Welcome!{% endblock %}</title>
+
+        {% block stylesheets %}
+            <link rel="stylesheet" href="{{ asset('build/css/app.css') }}">
+        {% endblock %}
+    </head>
+    <body>
+
+    {% set menu = knp_menu_get('sidebar', [], {include_homepage: false}) %}
+    {{ knp_menu_render(menu) }}
+
+    {{ knp_menu_render('main') }}
+
+        {% block body %}{% endblock %}
+        {% block javascripts %}
+            <script src="{{ asset('build/js/app.js') }}"></script>
+        {% endblock %}
+    </body>
+</html>

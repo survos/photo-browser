@@ -1,0 +1,18 @@
+easy_admin:
+    disabled_actions: ['delete']
+    list:
+        actions: ['show', 'edit']
+        title: 'list.%%entity_label%%'
+    show:
+        title: '%%entity_label%% (#%%entity_id%%)'
+    entities:
+{% for table in tables %}
+       {{ table.name }}:
+          class: App\Entity\{{ table.name }}
+          list:
+            fields:
+            {% for field in table.props %}
+                - {{ field.name }}
+            {% endfor %}
+
+{% endfor %}

@@ -1,0 +1,162 @@
+{% extends "base.html.twig"  %}
+
+{% macro attr(attributes) %}
+    {% for var, val in attributes %}
+        <li>{{ var }}: {{ val }}</li>
+        {% endfor %}
+    {% endmacro %}
+
+
+{% macro thumb(image) %}
+    {% set filter = 'my_widen_filter' %}
+    {% set thumbUrl = image.raw
+        ? 'https://dummyimage.com/200x80/000/fff&text=' ~ image.name
+        : asset(image.urlPath) | imagine_filter(filter) %}
+    <div class="img-thumbnail">
+        <a href="{{ path('dk_image', image.rp) }}">
+            <b>{{ image }}</b><br />
+        </a>
+
+
+        <a href="{{ thumbUrl }}">
+            <img src="{{ thumbUrl }}" title="{{ thumbUrl }}"/>
+        </a>
+
+    </div>
+{% endmacro %}
+
+
+{% block body %}
+    {% import _self as macro %}
+
+    <h1>Image {{ image }}</h1>
+
+    <h3>THUMB</h3>
+    <a href="{{ path('dk_thumb', {id: image.id}) }}">THUMB</a>
+    <table class="table">
+
+    <tr>
+        {% for filter in ['squared_thumbnail', 'my_heighten_filter', 'my_widen_filter'] if not image.raw%}
+            {% set thumbUrl = asset(image.urlPath) | imagine_filter(filter) %}
+            <td>
+                <b>{{ filter }}</b><br />
+                <a href="{{ thumbUrl }}">
+                    <img src="{{ thumbUrl }}" title="{{ thumbUrl }}"/>
+                </a>
+
+            </td>
+        {% endfor %}
+
+    </tr>
+    </table>
+
+    {% for relation in ['subjects', 'objects'] %}
+    <h3>{{ attribute(image, relation).count }} {{ relation }} Images</h3>
+        <ol>
+            {% for image in attribute(image, relation) %}
+                <li>
+                    {{ macro.thumb(image) }}
+                </li>
+            {% endfor %}
+
+        </ol>
+
+        {% endfor %}
+
+
+    {% if history %}
+        <h3>History for Image {{ image.id }}</h3>
+        {% if image.imageHistory %}
+            uuid: {{ image.imageHistory.uuid|default('..') }}
+        {% else %}
+            No History
+        {% endif %}
+
+            {% for step in history %}
+                {% if step.name == 'file' %}
+                    {% set f = step.data %}
+                    {% set a = f['@attributes'] %}
+                    {% set file = step.data.fileParams['@attributes'] %}
+                    <h4>{{ a.type|default('no-type') }} {{ file.fileName|default('~') }}: <small>{{ a.uuid|default('..') }}</small></h4>
+                    {% set fileParams = f['fileParams']['@attributes'] %}
+
+                    {% if step.image %}
+                        {{ macro.thumb(step.image) }}
+                    {% endif %}
+                    {{ macro.attr(fileParams) }}
+                {% elseif step.name == 'filter' %}
+                    {% set f = step.data %}
+                    {% set a = f['@attributes'] %}
+
+                    <h4 title="{{ a.filterName }}">{{ a.filterDisplayName }} Filter, v{{ a.filterVersion }}
+                        {% if a.branch|default(false) %}<i class="fa fa-code-fork pull-left"></i>{% endif %}
+                        <span class="badge">{{ a.filterCategory }}</span>
+                    </h4>
+                    <ol>
+                        {% for param in f.params.param %}
+                            {% set p = param['@attributes'] %}
+                            <li>
+                                {{ p.name }}: {{ p.value }}
+                            </li>
+                        {% endfor %}
+                    </ol>
+                {% else %}
+                    Invalid Step
+                {% endif %}
+            {% endfor %}
+
+                {#
+            <h3>History, Version {{ image.history['@attributes'].version }}</h3>
+            {% set f = image.history.file %}
+
+            <h4>File</h4>
+
+            <h4>Filter</h4>
+            {{ dump(image.imageHistory.historyArray) }}
+            {{ dump(image.imageHistory) }}
+            {{ dump(image.history ) }}
+            #}
+    {% else %}
+        <span class="text-danger">
+        No Image history record
+            </span>
+    {% endif %}
+
+
+
+    <h3>ORIG</h3>
+    <a href="{{ image.urlPath }}">See Original at {{ image.urlPath }}
+    </a>
+    {#
+    {% set filename = "file://///home/tac/elodie-photos/2017-04-Apr/Virginia/2017-04-28_15-32-37-20170428_113237.jpg" %}
+    {% set filename = "%s%s"|format(image.album.albumroot, image.urlPath) %}
+    <h3>LIIP</h3>
+    <img src="{{ asset(filename) | imagine_filter('squared_thumbnail') }}" />
+    <br />{{ filename }}
+    <img src="{{ asset(image.urlPath)}}" | />
+
+
+
+    {% set imageUrl = path('dk_jpg', image.rP) %}
+
+
+    <h3>OLD WAY</h3>
+    <a href="{{ imageUrl }}" class="btn btn-info">
+        <img title="{{ imageUrl }}" src="{{ imageUrl }}" />
+    </a>
+    {{ imageUrl }}
+    #}
+
+    {% if app.request.get('debug', false) %}
+    {{ dump(image) }}
+        {% endif %}
+
+    <pre>
+    {{ image_root }}
+        {{ image.album.relativepath }}
+        {{ image.album.albumroot }}
+        {{ image.urlPath }}
+    </pre>
+
+
+{% endblock %}

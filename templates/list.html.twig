@@ -1,0 +1,9 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+{{ path }}
+
+    {% for tutorial in tutorials %}
+        {{ dump(tutorial) }}
+        {% endfor %}
+{% endblock %}

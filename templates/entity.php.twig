@@ -1,0 +1,32 @@
+php
+
+namespace App\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+* @ORM\Entity(repositoryClass="App\Repository\{{ tableName }}Repository")
+* @ORM\Table(name="{{ tableName }}")
+*/
+class {{ tableName }}
+{
+
+{% for prop in table.props %}
+/**
+* @ORM\Column(type="{{ prop.type|lower }}", name="{{ prop.name }}")
+{% if prop.id|default(false) %}
+* @ORM\Id
+* @ORM\GeneratedValue
+{% endif %}
+*/
+private ${{ prop.name }};
+
+    public function get{{ prop.name|capitalize }}() { return $this->{{ prop.name }}; }
+
+{% endfor %}
+
+public function __toString(): string
+{
+      return $this->{{ 'name' in table.props|keys ? 'name' : 'id'  }};
+}
+}

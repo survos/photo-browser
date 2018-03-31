@@ -1,0 +1,61 @@
+{% extends "base.html.twig"  %}
+
+{% block body %}
+
+    <h3>{{ album.images|length }} Images in {{ album }}</h3>
+
+    {% if album.images.count != images|length %}
+        <span class="text-danger">Warning: {{ album.images.count - images|length }} images are missing metadata</span>
+        {% endif %}
+
+    <table class="table table-condensed dataTables-basic">
+        <thead>
+        <tr>
+            <th>ID/Name</th>
+            <th>Widen</th>
+            <td>Meta</td>
+            <td>Location</td>
+            <td>Tags</td>
+        </tr>
+        </thead>
+        <tbody>
+
+        {% for i in album.images %}
+            <tr valign="top" >
+                <td><a class="btn btn-sm" href="{{ path('dk_image', i.rp) }}">{{ i.id }}</a>
+                    <br />
+                <a class="btn btn-sm" href="{{ path('dk_image', i.rp) }}">{{ i.name }}</a></td>
+
+                {# square image, needs border?
+                <td>
+                    {% if i.raw %}
+                        RAW
+                        {% else %}
+                    <img src="{{ asset(i.filePath) | imagine_filter('squared_thumbnail') }}" />
+                        {% endif %}
+                </td>
+                #}
+                <td>
+                    {% if not i.raw %}
+                    {% set thumbUrl = asset(i.urlPath) | imagine_filter('my_widen_filter') %}
+                    <a href="{{ thumbUrl }}">
+                        <img src="{{ thumbUrl }}" title="{{ thumbUrl }}" />
+                    </a>
+                        {% endif %}
+
+                </td>
+
+                <td>{{ i.meta  }}</td>
+                <td>{{ i.location }}</td>
+                <td>{{ i.tags|join('<br />')|raw }}</td>
+                {% if app.request.get('debug', false) %}
+                <td>{{ dump(i.meta) }}</td>
+                <td>{{ dump(i.info) }}</td>
+                <td>{{ dump(i) }}</td>
+                    {% endif %}
+            </tr>
+        {% endfor %}
+
+        </tbody>
+    </table>
+{% endblock %}
