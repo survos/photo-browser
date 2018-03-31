@@ -13,6 +13,7 @@ class ImageTagProperties
 
 /**
 * @ORM\Column(type="integer", name="imageid")
+ * @ORM\Id()
 */
 private $imageid;
 
@@ -20,6 +21,7 @@ private $imageid;
 
 /**
 * @ORM\Column(type="integer", name="tagid")
+ * @ORM\Id()
 */
 private $tagid;
 
@@ -27,6 +29,7 @@ private $tagid;
 
 /**
 * @ORM\Column(type="text", name="property")
+ * @ORM\Id()
 */
 private $property;
 

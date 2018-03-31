@@ -12,21 +12,30 @@ class ImageProperties
 {
 
 /**
-* @ORM\Column(type="", name="imageid")
+* @ORM\Column(type="integer", name="imageid")
+ * @ORM\Id()
 */
 private $imageid;
 
     public function getImageid() { return $this->imageid; }
 
-/**
+    /**
+     * @ORM\Id
+     * @ORM\OneToOne(targetEntity="App\Entity\Image")
+     * @ORM\JoinColumn(name="imageid", referencedColumnName="id")
+     */
+    protected $image;
+
+    /**
 * @ORM\Column(type="text", name="property")
+ * @ORM\Id()
 */
 private $property;
 
     public function getProperty() { return $this->property; }
 
 /**
-* @ORM\Column(type="", name="value")
+* @ORM\Column(type="string", name="value")
 */
 private $value;
 
@@ -35,6 +44,6 @@ private $value;
 
 public function __toString(): string
 {
-      return $this->name;
+      return $this->getImageid();
 }
 }
