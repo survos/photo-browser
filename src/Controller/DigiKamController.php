@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\AlbumRoots;
 use App\Entity\Albums;
 use App\Entity\Image;
+use App\Entity\Tags;
 use App\Repository\ImageRepository;
 use App\Service\ImageService;
 use Doctrine\DBAL\Connection;
@@ -75,6 +76,18 @@ class DigiKamController extends Controller
     }
 
     /**
+     * @Route("/dashboard", name="admin_dashboard")
+     */
+    public function dashboardAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+        return $this->render('easy_admin/dashboard.html.twig', [
+            'tags' => $this->getDoctrine()->getRepository(Tags::class)->findAll()
+        ]);
+    }
+
+
+    /**
      * @Route("/", name="home")
      */
     public function home()
@@ -85,7 +98,10 @@ class DigiKamController extends Controller
         // Example with parameter injected into translation "user.profile"
         // $breadcrumbs->addItem($txt, $url, ["%user%" => $user->getName()]);
 
-        return $this->render("dashboard.html.twig", ['albumRoots' =>
+        return $this->render("dashboard.html.twig", [
+            'tags' => $this->getDoctrine()->getRepository(Tags::class)->findAll(),
+
+            'albumRoots' =>
             $this->getDoctrine()->getRepository(AlbumRoots::class)->findAll()
         ]);
 
