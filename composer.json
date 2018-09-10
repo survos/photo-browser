@@ -15,12 +15,12 @@
         "rezzza/flickr-bundle": "dev-tacman-patch-2",
         "sensio/framework-extra-bundle": "^5.1",
         "symfony/console": "^4.0",
-        "symfony/debug-pack": "^1.0",
         "symfony/finder": "^4.0",
         "symfony/flex": "^1.0",
         "symfony/framework-bundle": "^4.0",
         "symfony/lts": "^4@dev",
         "symfony/maker-bundle": "^1.0",
+        "symfony/messenger": "^4.0",
         "symfony/orm-pack": "^1.0",
         "symfony/twig-bundle": "^4.0",
         "symfony/web-server-bundle": "^4.0",
@@ -29,6 +29,7 @@
         "whiteoctober/breadcrumbs-bundle": "dev-master"
     },
     "require-dev": {
+        "symfony/debug-pack": "dev-master",
         "symfony/dotenv": "^4.0"
     },
     "minimum-stability": "dev",
@@ -57,7 +58,7 @@
     "scripts": {
         "auto-scripts": {
             "cache:clear": "symfony-cmd",
-            "assets:install --symlink --relative %PUBLIC_DIR%": "symfony-cmd"
+            "assets:install %PUBLIC_DIR%": "symfony-cmd"
         },
         "post-install-cmd": [
             "@auto-scripts"
@@ -71,8 +72,8 @@
     },
     "extra": {
         "symfony": {
-            "id": "01C6FTDM9PMS0FBN73AWDA3FN0",
-            "allow-contrib": false
+            "allow-contrib": false,
+            "require": "4.1.*"
         }
     },
     "repositories":
