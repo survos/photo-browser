@@ -5,14 +5,17 @@ namespace App\Controller;
 use App\Entity\AlbumRoots;
 use App\Entity\Albums;
 use App\Entity\Image;
+
+use App\Entity\Tags;
+use App\Repository\AlbumsRepository;
 use App\Repository\ImageRepository;
 use App\Service\ImageService;
 use Doctrine\DBAL\Connection;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\Routing\Annotation\Route;
 use WhiteOctober\BreadcrumbsBundle\Model\Breadcrumbs;
 
 class DigiKamController extends Controller
@@ -46,7 +49,8 @@ class DigiKamController extends Controller
 
 
 
-        return $this->render("dk/albumRoots.html.twig", ['albumRoots' =>
+        return $this->render("dk/albumRoots.html.twig", [
+            'albumRoots' =>
             $this->getDoctrine()->getRepository(AlbumRoots::class)->findAll()
         ]);
 
@@ -75,9 +79,21 @@ class DigiKamController extends Controller
     }
 
     /**
+     * @Route("/dashboard", name="admin_dashboard")
+     */
+    public function dashboardAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+        return $this->render('easy_admin/dashboard.html.twig', [
+            'tags' => $this->getDoctrine()->getRepository(Tags::class)->findAll()
+        ]);
+    }
+
+
+    /**
      * @Route("/", name="home")
      */
-    public function home()
+    public function home(AlbumsRepository $albumsRepository, ImageRepository $imageRepository)
     {
         $breadcrumbs = $this->setBreadcrumbs();
         $breadcrumbs->addItem("Dashboard", '/');
@@ -85,7 +101,11 @@ class DigiKamController extends Controller
         // Example with parameter injected into translation "user.profile"
         // $breadcrumbs->addItem($txt, $url, ["%user%" => $user->getName()]);
 
-        return $this->render("dashboard.html.twig", ['albumRoots' =>
+        return $this->render("dashboard.html.twig", [
+            'tags' => $this->getDoctrine()->getRepository(Tags::class)->findAll(),
+            'albumCount' => $albumsRepository->count([]),
+            'imageCount' => $imageRepository->count([]),
+            'albumRoots' =>
             $this->getDoctrine()->getRepository(AlbumRoots::class)->findAll()
         ]);
 

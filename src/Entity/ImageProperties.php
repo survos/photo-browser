@@ -13,7 +13,7 @@ class ImageProperties
 
 /**
 * @ORM\Column(type="integer", name="imageid")
- * @ORM\Id()
+ *@ORM\Id()
 */
 private $imageid;
 
