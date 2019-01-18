@@ -95,17 +95,20 @@
             "ref": "66070ea553247b0cd5275e21d0fe5399a25f40be"
         }
     },
-    "guzzle/common": {
-        "version": "v3.9.2"
-    },
-    "guzzle/http": {
-        "version": "v3.9.2"
-    },
-    "guzzle/parser": {
-        "version": "v3.9.2"
+    "fig/link-util": {
+        "version": "1.0.x-dev"
     },
     "guzzle/stream": {
         "version": "v3.9.2"
+    },
+    "guzzlehttp/guzzle": {
+        "version": "6.3-dev"
+    },
+    "guzzlehttp/promises": {
+        "version": "1.4-dev"
+    },
+    "guzzlehttp/psr7": {
+        "version": "1.5-dev"
     },
     "imagine/imagine": {
         "version": "0.7-dev"
@@ -130,6 +133,9 @@
     },
     "markbaker/complex": {
         "version": "1.4.6"
+    },
+    "markbaker/matrix": {
+        "version": "1.1.4"
     },
     "monolog/monolog": {
         "version": "1.x-dev"
@@ -173,11 +179,20 @@
     "psr/container": {
         "version": "1.0.0"
     },
+    "psr/http-message": {
+        "version": "1.0.x-dev"
+    },
+    "psr/link": {
+        "version": "1.0.x-dev"
+    },
     "psr/log": {
         "version": "1.0.2"
     },
     "psr/simple-cache": {
         "version": "1.0.0"
+    },
+    "ralouphie/getallheaders": {
+        "version": "3.0.2"
     },
     "rezzza/flickr": {
         "version": "v1.1.0"
@@ -211,6 +226,9 @@
             "version": "3.3",
             "ref": "c646e4b71af082e94b5014daca36ef6812bad076"
         }
+    },
+    "symfony/contracts": {
+        "version": "1.0-dev"
     },
     "symfony/debug": {
         "version": "v4.0.4"
@@ -302,6 +320,9 @@
             "ref": "f11dfa18618a8a5dd853ea3a302db2e0557e031c"
         }
     },
+    "symfony/mime": {
+        "version": "4.3-dev"
+    },
     "symfony/monolog-bridge": {
         "version": "4.1.x-dev"
     },
@@ -365,6 +386,18 @@
             "ref": "f8a63faa0d9521526499c0a8f403c9964ecb0527"
         }
     },
+    "symfony/security-core": {
+        "version": "4.3-dev"
+    },
+    "symfony/security-csrf": {
+        "version": "4.3-dev"
+    },
+    "symfony/security-guard": {
+        "version": "4.3-dev"
+    },
+    "symfony/security-http": {
+        "version": "4.3-dev"
+    },
     "symfony/serializer": {
         "version": "4.0.x-dev"
     },
@@ -400,6 +433,12 @@
     },
     "symfony/var-dumper": {
         "version": "4.1.x-dev"
+    },
+    "symfony/var-exporter": {
+        "version": "4.3-dev"
+    },
+    "symfony/web-link": {
+        "version": "4.3-dev"
     },
     "symfony/web-profiler-bundle": {
         "version": "3.3",
