@@ -10,5 +10,4 @@ Configure Digikam 6 to use a MySQL (or MariaDB) database, either locally or remo
 
 One easy way to deploy this app with your photo database is via Heroku.
 
-
      heroku addons:create jawsdb-maria:kitefin
