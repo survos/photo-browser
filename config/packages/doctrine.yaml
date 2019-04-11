@@ -11,9 +11,9 @@ doctrine:
         connections:
             # A collection of different named connections (e.g. default, conn2, etc)
             default:
-                url: '%env(resolve:DIGIKAM_DATABASE_URL)%'
+                url: '%env(resolve:DATABASE_URL)%'
             thumb:
-                url: '%env(resolve:DIGIKAM_THUMBNAIL_DATABASE_URL)%'
+                url: '%env(resolve:DATABASE_URL)%'
             rt:
                 url: '%env(resolve:DATABASE_URL)%'
 

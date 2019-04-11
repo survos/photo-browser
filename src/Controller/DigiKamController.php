@@ -27,6 +27,72 @@ class DigiKamController extends Controller
         return $this->getDoctrine()->getConnection('thumb');
     }
 
+    /*
+     * Database Connectoptions=
+Database Hostname=us-cdbr-iron-east-03.cleardb.net
+Database Name=heroku_56b2a085e85da39
+Database Name Face=heroku_56b2a085e85da39
+Database Name Similarity=heroku_56b2a085e85da39
+Database Name Thumbnails=heroku_56b2a085e85da39
+Database Password=43d58a95
+Database Port=3306
+Database Type=QMYSQL
+Database Username=b6d568a5b2dda2
+
+
+    Database Connectoptions=
+Database Hostname=us-cdbr-iron-east-03.cleardb.net
+Database Name=heroku_56b2a085e85da39
+Database Name Face=heroku_56b2a085e85da39
+Database Name Similarity=heroku_56b2a085e85da39
+Database Name Thumbnails=heroku_56b2a085e85da39
+Database Password=43d58a95
+Database Port=3306
+Database Type=QMYSQL
+Database Username=b6d568a5b2dda2
+Internal Database Server=false
+Internal Database Server Mysql Init Command=
+Internal Database Server Mysql Server Command=
+Internal Database Server Path=
+
+    [Database Settings]
+Database Connectoptions=
+Database Hostname=mcldisu5ppkm29wf.cbetxkdyhwsb.us-east-1.rds.amazonaws.com
+Database Name=mancmvactb8s2peq
+Database Name Face=mancmvactb8s2peq
+Database Name Similarity=mancmvactb8s2peq
+Database Name Thumbnails=mancmvactb8s2peq
+Database Password=bd6foiqgtbmjjh7r
+Database Port=3306
+Database Type=QMYSQL
+Database Username=qfnyc3y4nemxdw0e
+Internal Database Server=false
+Internal Database Server Mysql Init Command=
+Internal Database Server Mysql Server Command=
+Internal Database Server Path=
+
+# qfnyc3y4nemxdw0e:bd6foiqgtbmjjh7r@mcldisu5ppkm29wf.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/mancmvactb8s2peq
+
+
+    Database Connectoptions=
+Database Hostname=127.0.0.1
+Database Name=digikam
+Database Name Face=digikam
+Database Name Similarity=digikam
+Database Name Thumbnails=digikam
+Database Password=dk
+Database Port=3306
+Database Type=QMYSQL
+Database Username=digikam
+Internal Database Server=false
+Internal Database Server Mysql Init Command=
+Internal Database Server Mysql Server Command=
+Internal Database Server Path=
+
+    mysql://b6d568a5b2dda2:43d58a95@us-cdbr-iron-east-03.cleardb.net/heroku_56b2a085e85da39?reconnect=true
+
+     */
+
     /**
      * @Route("/thumb/{id}", name="dk_thumb")
      */
