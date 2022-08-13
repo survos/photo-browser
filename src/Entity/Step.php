@@ -4,34 +4,20 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\Entity(repositoryClass="App\Repository\StepRepository")
- */
+#[ORM\Entity(repositoryClass: \App\Repository\StepRepository::class)]
 class Step
 {
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     */
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: 'integer')]
     private $id;
-
-    /**
-     * @ORM\Column(type="string", length=100)
-     */
+    #[ORM\Column(type: 'string', length: 100)]
     private $name;
-
-    /**
-     * @ORM\Column(type="string", length=100)
-     */
+    #[ORM\Column(type: 'string', length: 100)]
     private $imageUrl;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Tutorial", inversedBy="steps")
-     * @ORM\JoinColumn(nullable=false)
-     */
+    #[ORM\ManyToOne(targetEntity: \App\Entity\Tutorial::class, inversedBy: 'steps')]
+    #[ORM\JoinColumn(nullable: false)]
     private $tutorial;
-
     /**
      * @return mixed
      */
@@ -39,15 +25,10 @@ class Step
     {
         return $this->id;
     }
-
-    /**
-     * @param mixed $id
-     */
-    public function setId($id): void
+    public function setId(mixed $id): void
     {
         $this->id = $id;
     }
-
     /**
      * @return mixed
      */
@@ -55,15 +36,10 @@ class Step
     {
         return $this->name;
     }
-
-    /**
-     * @param mixed $name
-     */
-    public function setName($name): void
+    public function setName(mixed $name): void
     {
         $this->name = $name;
     }
-
     /**
      * @return mixed
      */
@@ -71,15 +47,10 @@ class Step
     {
         return $this->imageUrl;
     }
-
-    /**
-     * @param mixed $imageUrl
-     */
-    public function setImageUrl($imageUrl): void
+    public function setImageUrl(mixed $imageUrl): void
     {
         $this->imageUrl = $imageUrl;
     }
-
     /**
      * @return mixed
      */
@@ -87,14 +58,8 @@ class Step
     {
         return $this->tutorial;
     }
-
-    /**
-     * @param mixed $tutorial
-     */
-    public function setTutorial($tutorial): void
+    public function setTutorial(mixed $tutorial): void
     {
         $this->tutorial = $tutorial;
     }
-
-
 }

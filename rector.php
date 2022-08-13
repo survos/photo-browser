@@ -16,15 +16,15 @@ use Rector\TypeDeclaration\Rector\ClassMethod\ReturnTypeFromStrictNewArrayRector
 
 return static function (RectorConfig $rectorConfig): void {
     $rectorConfig->paths([
-        __DIR__ . '/src/Event'
+        __DIR__ . '/src/Entity'
     ]);
 
     $rectorConfig->rules([
         \Rector\Symfony\Rector\Class_\CommandPropertyToAttributeRector::class,
-        ReturnTypeFromStrictBoolReturnExprRector::class,
+//        ReturnTypeFromStrictBoolReturnExprRector::class,
 //        ReturnTypeFromStrictNativeFuncCallRector::class,
-        ReturnTypeFromStrictNewArrayRector::class,
-        ReturnTypeFromStrictScalarReturnExprRector::class,
+//        ReturnTypeFromStrictNewArrayRector::class,
+//        ReturnTypeFromStrictScalarReturnExprRector::class,
     ]);
 
     // register a single rule

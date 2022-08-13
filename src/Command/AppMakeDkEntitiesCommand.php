@@ -17,8 +17,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 
 class AppMakeDkEntitiesCommand extends ContainerAwareCommand
 {
-    /** @var SymfonyStyle */
-    private $io;
+    private ?\Symfony\Component\Console\Style\SymfonyStyle $io = null;
     protected static $defaultName = 'app:make-dk-entities';
 
     protected function configure()
@@ -85,7 +84,7 @@ class AppMakeDkEntitiesCommand extends ContainerAwareCommand
         $tables = $this->parseSql($sqlFile);
 
         foreach ($tables as $tableName => $table) {
-            $io->writeln(sprintf("$tableName (%s properties", count($table['props'])));
+            $io->writeln(sprintf("$tableName (%s properties", is_countable($table['props']) ? count($table['props']) : 0));
             /*
             $this->renderTemplate('entity.php.twig', ['tableName' => $tableName, 'table' => $table], "Entity/$tableName.php");
             $this->renderTemplate('repository.php.twig', $tableName, $table, "Repository/${tableName}Repository.php");
@@ -102,12 +101,16 @@ class AppMakeDkEntitiesCommand extends ContainerAwareCommand
             })
         ], "../config/packages/easy_admin.yaml");
 
-        $io->success(sprintf('%s entities created.', count($tables)));
+        $io->success(sprintf('%s entities created.', is_countable($tables) ? count($tables) : 0));
     }
 
     private function processSheet(Worksheet $worksheet)
     {
-// Get the highest row and column numbers referenced in the worksheet
+$inTable = null;
+        $property = [];
+        $tables = [];
+        $propertyName = null;
+        // Get the highest row and column numbers referenced in the worksheet
         $tableName = '';
         $highestRow = $worksheet->getHighestRow(); // e.g. 10
         $highestColumn = $worksheet->getHighestColumn(); // e.g 'F'
@@ -123,7 +126,7 @@ class AppMakeDkEntitiesCommand extends ContainerAwareCommand
         ];
 
         for ($row = 1; $row <= $highestRow; ++$row) {
-            $firstValue = trim($worksheet->getCellByColumnAndRow(1, $row)->getValue());
+            $firstValue = trim((string) $worksheet->getCellByColumnAndRow(1, $row)->getValue());
             $inRowHeader = ($firstValue == 'NAME');
             if ($inRowHeader) {
                 $inTable = true;
@@ -140,7 +143,7 @@ class AppMakeDkEntitiesCommand extends ContainerAwareCommand
             }
 
             for ($col = 1; $col <= $highestColumnIndex; ++$col) {
-                $value = trim($worksheet->getCellByColumnAndRow($col, $row)->getValue());
+                $value = trim((string) $worksheet->getCellByColumnAndRow($col, $row)->getValue());
                 if ($inTable) {
                     if ($col == 1) {
                         $propertyName = $value;
@@ -170,7 +173,7 @@ class AppMakeDkEntitiesCommand extends ContainerAwareCommand
             dump($statement);
             if (preg_match('/CREATE TABLE (\S*)\n\s*\((.*)\)/ms', $statement, $m)) {
                 $tableName = $m[1];
-                $props = explode(",\n", $m[2]);
+                $props = explode(",\n", (string) $m[2]);
                 $p = [];
                 foreach ($props as $prop) {
                     $prop = trim($prop);
@@ -179,7 +182,7 @@ class AppMakeDkEntitiesCommand extends ContainerAwareCommand
 
                     } else {
                         // properties
-                        list($name, $type) = explode(' ', $prop);
+                        [$name, $type] = explode(' ', $prop);
                         $name = trim($name);
                         $p[] = [
                             'name' => $name,

@@ -10,10 +10,9 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Finder\Finder;
 
+#[\Symfony\Component\Console\Attribute\AsCommand('app:split-by-date')]
 class AppSplitByDateCommand extends Command
 {
-    protected static $defaultName = 'app:split-by-date';
-
     protected function configure()
     {
         $this
@@ -22,8 +21,7 @@ class AppSplitByDateCommand extends Command
             ->addOption('recursive', 'r', InputOption::VALUE_NONE, 'Recurse through subdirectories')
         ;
     }
-
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);
         $source = $input->getArgument('source');
@@ -40,7 +38,7 @@ class AppSplitByDateCommand extends Command
                     if (in_array($ext, ['jpg', 'jpeg']) ) {
 
                         $exif = exif_read_data($file->getRealPath());
-                        $dateTaken = new \DateTime($exif['DateTime']);
+                        $dateTaken = new \DateTime($exif[\DateTime::class]);
                     } elseif (in_array($ext, ['raw', 'cr2','raf'])) {
                         try {
                             $im = new \Imagick($file->getRealPath());
@@ -52,7 +50,7 @@ class AppSplitByDateCommand extends Command
                             $io->warning("ImageMagick didn't work, trying exif again");
 
                             $exif = exif_read_data($file->getRealPath());
-                            $dateTaken = new \DateTime($exif['DateTime']);
+                            $dateTaken = new \DateTime($exif[\DateTime::class]);
 
                         }
                     } else {

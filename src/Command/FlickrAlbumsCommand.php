@@ -38,6 +38,8 @@ class FlickrAlbumsCommand extends ContainerAwareCommand
     protected function execute(InputInterface $input, OutputInterface $output)
     {
 
+        $photosetsTitles = [];
+        $arg1 = null;
         // can't figure out the bundle :-(
 
         $c = $this->getContainer();
@@ -79,9 +81,7 @@ dump($xml);
         die("Stop");
 
 
-$xml = $factory->call('flickr.photos.getInfo', array(
-    'photo_id' => 1337,
-));
+$xml = $factory->call('flickr.photos.getInfo', ['photo_id' => 1337]);
         dump($xml);
 
         $arg1 = $input->getArgument('arg1');

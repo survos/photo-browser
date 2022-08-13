@@ -47,10 +47,12 @@
 
                 <td>{{ i.meta  }}</td>
                 <td>{{ i.location }}</td>
-                <td>{{ i.tags|join('<br />')|raw }}</td>
+
+{#                <td>{{ i.tags|join('<br />')|raw }}</td>#}
                 {% if app.request.get('debug', false) %}
                 <td>{{ dump(i.meta) }}</td>
                 <td>{{ dump(i.info) }}</td>
+                <td>{{ dump(i.tags) }}</td>
                 <td>{{ dump(i) }}</td>
                     {% endif %}
             </tr>

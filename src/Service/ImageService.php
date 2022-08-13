@@ -9,11 +9,8 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class ImageService
 {
 
-    private $imageRepository;
-
-    public function __construct(ImageRepository $imageRepository)
+    public function __construct(private readonly ImageRepository $imageRepository)
     {
-        $this->imageRepository = $imageRepository;
     }
 
     private function createStep($options)
@@ -54,7 +51,7 @@ class ImageService
 
         if ($image->isRaw()) {
             // check if there's an associated .thumb
-            $jpeg = str_replace('.RAF', '.thumb.jpg', $image->getName());
+            $jpeg = str_replace('.RAF', '.thumb.jpg', (string) $image->getName());
             if($relatedImage = $this->imageRepository->findOneBy([
                 'name' => $jpeg,
             ])) {
@@ -62,7 +59,7 @@ class ImageService
             }
 
             // check if there's an associated .JPG in the same directory or in ../JPG
-            $jpeg = str_replace('RAF', 'JPG', $image->getName());
+            $jpeg = str_replace('RAF', 'JPG', (string) $image->getName());
             if($relatedImage = $this->imageRepository->findOneBy([
                 'name' => $jpeg,
             ])) {
@@ -72,11 +69,11 @@ class ImageService
 
 
         if ($imageHistory = $image->getImageHistory()) {
-            if ( ($xml = simplexml_load_string($imageHistory->getHistoryXml())) && ($children = $xml->children()) )
+            if ( ($xml = simplexml_load_string((string) $imageHistory->getHistoryXml())) && ($children = $xml->children()) )
             {
                 foreach ($children as $child) {
                     $image = null;
-                    $data = json_decode(json_encode($child), true);
+                    $data = json_decode(json_encode($child, JSON_THROW_ON_ERROR), true, 512, JSON_THROW_ON_ERROR);
                     if ($child->getName() == 'file') {
                         if ($hash = $data['fileParams']['@attributes']['fileHash'] ?? null) {
                             $image = $this->imageRepository->findOneBy(['uniqueHash' => $hash]);

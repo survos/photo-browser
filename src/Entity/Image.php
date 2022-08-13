@@ -5,121 +5,46 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
-* @ORM\Entity(repositoryClass="App\Repository\ImageRepository")
-* @ORM\Table(name="Images")
-*/
-class Image extends BaseEntity
+#[ORM\Entity(repositoryClass: \App\Repository\ImageRepository::class)]
+#[ORM\Table(name: 'Images')]
+class Image extends BaseEntity implements \Stringable
 {
     public function __construct()
     {
         $this->tags = new ArrayCollection();
         $this->subjects = new ArrayCollection();
         $this->objects = new ArrayCollection();
-        $this->location = null;
-        $this->meta = null;
     }
-
-    /**
-    * @ORM\Column(type="integer", name="id")
-    * @ORM\Id
-    * @ORM\GeneratedValue
-    */
+    #[ORM\Column(type: 'integer', name: 'id')]
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
     private $id;
-
     public function getId()
     {
         return $this->id;
     }
-
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Albums", inversedBy="images")
-     * @ORM\JoinColumn(name="album")
-     */
-
+    #[ORM\ManyToOne(targetEntity: \App\Entity\Albums::class, inversedBy: 'images')]
+    #[ORM\JoinColumn(name: 'album')]
     private $album;
-
-    /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Tags", mappedBy="images")
-     * @ORM\JoinTable(name="ImageTags",
-     *      joinColumns={@ORM\JoinColumn(name="tagid", referencedColumnName="id")},
-     *      inverseJoinColumns={@ORM\JoinColumn(name="imageid", referencedColumnName="id")}
-     *      )
-     */
+    #[ORM\ManyToMany(targetEntity: \App\Entity\Tags::class, mappedBy: 'images')]
+    #[ORM\JoinTable(name: 'ImageTags', joinColumns: [], inverseJoinColumns: [])]
+    #[ORM\JoinColumn(name: 'tagid', referencedColumnName: 'id')]
+    #[ORM\JoinColumn(name: 'imageid', referencedColumnName: 'id')]
     private $tags;
     public function getTags()
     {
         return $this->tags;
     }
-
-
-
-    /**
-     * @ORM\OneToOne(targetEntity="App\Entity\ImageInformation", fetch="EAGER")
-     * @ORM\JoinColumn(name="id", referencedColumnName="imageid")
-     */
-
+    #[ORM\OneToOne(targetEntity: \App\Entity\ImageInformation::class, fetch: 'EAGER')]
+    #[ORM\JoinColumn(name: 'id', referencedColumnName: 'imageid')]
     private $information;
-
-
-    /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Image", mappedBy="objects")
-     * @ORM\JoinTable(name="ImageRelations",
-     *      joinColumns={@ORM\JoinColumn(name="object", referencedColumnName="id")},
-     *      inverseJoinColumns={@ORM\JoinColumn(name="subject", referencedColumnName="id")}
-     *      )
-    private $objects;
-     */
-
-    /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Image", mappedBy="subjects")
-     * @ORM\JoinTable(name="ImageRelations",
-     *      joinColumns={@ORM\JoinColumn(name="subject", referencedColumnName="id")},
-     *      inverseJoinColumns={@ORM\JoinColumn(name="object", referencedColumnName="id")}
-     *      )
-    private $subjects;
-     */
-
-    // ...
-
-
-    /**
-     * @ ORM\OneToMany(targetEntity="App\Entity\ImageRelations")
-     * @ ORM\JoinColumn(name="id", referencedColumnName="subject")
-
-    private $subjects; // subjectOf
-     */
-
-    /**
-     * @ORM\OneToOne(targetEntity="App\Entity\ImageMetadata", orphanRemoval=true, fetch="EAGER")
-     * @  ORM\JoinColumn(name="id", referencedColumnName="imageid", nullable=true)
+    #[ORM\OneToOne(targetEntity: \App\Entity\ImageMetadata::class, mappedBy: 'image', orphanRemoval: true, fetch: 'EAGER')]
     private $meta = null;
-     */
-
-
-    /**
-     * @ORM\OneToOne(targetEntity="App\Entity\ImageMetadata", mappedBy="image", orphanRemoval=true, fetch="EAGER")
-     */
-
-    private $meta;
-
-    /**
-     * @ORM\OneToOne(targetEntity="App\Entity\ImageHistory", fetch="EAGER")
-     * @ORM\JoinColumn(name="id", referencedColumnName="imageid")
-     */
-
+    #[ORM\OneToOne(targetEntity: \App\Entity\ImageHistory::class, fetch: 'EAGER')]
+    #[ORM\JoinColumn(name: 'id', referencedColumnName: 'imageid')]
     private $history;
-
-    /**
-     * @ ORM\OneToOne(targetEntity="App\Entity\ImagePositions", orphanRemoval=true, fetch="EAGER")
-     * @ ORM\JoinColumn(name="id", referencedColumnName="imageid", nullable=true)
-     */
-
-    /**
-     * @ORM\OneToOne(targetEntity="App\Entity\ImagePositions", mappedBy="image", orphanRemoval=true, fetch="EAGER")
-     */
+    #[ORM\OneToOne(targetEntity: \App\Entity\ImagePositions::class, mappedBy: 'image', orphanRemoval: true, fetch: 'EAGER')]
     private $location = null;
-
     /**
      * @return mixed
      */
@@ -127,17 +52,14 @@ class Image extends BaseEntity
     {
         return $this->location;
     }
-
     /**
-     * @param mixed $location
      * @return Image
      */
-    public function setLocation($location)
+    public function setLocation(mixed $location)
     {
         $this->location = $location;
         return $this;
     }
-
     /**
      * @return mixed
      */
@@ -145,7 +67,6 @@ class Image extends BaseEntity
     {
         return $this->meta;
     }
-
     /**
      * @param mixed $meta
      * @return Image
@@ -155,7 +76,6 @@ class Image extends BaseEntity
         $this->meta = $meta;
         return $this;
     }
-
     /**
      * @return mixed
      */
@@ -163,7 +83,6 @@ class Image extends BaseEntity
     {
         return $this->information;
     }
-
     /**
      * @param mixed $information
      * @return Image
@@ -173,84 +92,54 @@ class Image extends BaseEntity
         $this->information = $information;
         return $this;
     }
-
     public function isRaw(): bool
     {
-        return $this->getInfo() ? substr($this->getInfo()->getFormat(), 0, 3) === 'RAW' : true;
+        return $this->getInfo() ? str_starts_with((string) $this->getInfo()->getFormat(), 'RAW') : true;
     }
-
-
     public function getAlbum(): ?Albums
     {
         return $this->album;
     }
-
-    /**
-    * @ORM\Column(type="string", name="name")
-    */
+    #[ORM\Column(type: 'string', name: 'name')]
     private $name;
-
     public function getName()
     {
         return $this->name;
     }
-
-    /**
-    * @ORM\Column(type="integer", name="status")
-    */
+    #[ORM\Column(type: 'integer', name: 'status')]
     private $status;
-
     public function getStatus()
     {
         return $this->status;
     }
-
-    /**
-    * @ORM\Column(type="integer", name="category")
-    */
+    #[ORM\Column(type: 'integer', name: 'category')]
     private $category;
-
     public function getCategory()
     {
         return $this->category;
     }
-
-    /**
-    * @ORM\Column(type="datetime", name="modificationDate")
-    */
+    #[ORM\Column(type: 'datetime', name: 'modificationDate')]
     private $modificationDate;
-
     public function getModificationdate()
     {
         return $this->modificationDate;
     }
-
-    /**
-    * @ORM\Column(type="integer", name="fileSize")
-    */
+    #[ORM\Column(type: 'integer', name: 'fileSize')]
     private $fileSize;
-
     public function getFilesize()
     {
         return $this->fileSize;
     }
-
-    /**
-    * @ORM\Column(type="text", name="uniqueHash")
-    */
+    #[ORM\Column(type: 'text', name: 'uniqueHash')]
     private $uniqueHash;
-
     public function getUniquehash()
     {
         return $this->uniqueHash;
     }
-
-
     public function __toString(): string
     {
         return sprintf("%d: %s", $this->getId(), $this->name);
     }
-
     /**
      * @return mixed
      */
@@ -258,17 +147,14 @@ class Image extends BaseEntity
     {
         return $this->information;
     }
-
     /**
-     * @param mixed $information
      * @return Image
      */
-    public function setInformation($information)
+    public function setInformation(mixed $information)
     {
         $this->information = $information;
         return $this;
     }
-
     /**
      * @return mixed
      */
@@ -276,35 +162,28 @@ class Image extends BaseEntity
     {
         return $this->history;
     }
-
     /**
-     * @param mixed $history
      * @return Image
      */
-    public function setHistory($history)
+    public function setHistory(mixed $history)
     {
         $this->history = $history;
         return $this;
     }
-
-
     public function getUrlPath()
     {
         return $this->getAlbum() ? sprintf("%s/%s", $this->getAlbum()->getPath(), $this->getName()) : '#';
     }
-
     public function getFilePath()
     {
         return $this->getAlbum()->getAlbumroot()->getSpecificpath() . '/' . $this->getAlbum()->getRelativepath() . '/' . $this->getName();
     }
-
     public function getUniqueIdentifiers()
     {
         return [
             'id' => $this->getId()
         ];
     }
-
     /**
      * @return mixed
      */
@@ -312,17 +191,14 @@ class Image extends BaseEntity
     {
         return $this->objects;
     }
-
     /**
-     * @param mixed $objects
      * @return Image
      */
-    public function setObjects($objects)
+    public function setObjects(mixed $objects)
     {
         $this->objects = $objects;
         return $this;
     }
-
     /**
      * @return mixed
      */
@@ -330,12 +206,10 @@ class Image extends BaseEntity
     {
         return $this->subjects;
     }
-
     /**
-     * @param mixed $subjects
      * @return Image
      */
-    public function setSubjects($subjects)
+    public function setSubjects(mixed $subjects)
     {
         $this->subjects = $subjects;
         return $this;

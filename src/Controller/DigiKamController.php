@@ -27,9 +27,9 @@ class DigiKamController extends AbstractController
      * DigiKamController constructor.
      */
     public function __construct(private readonly Breadcrumbs $breadcrumbs,
-                                private RouterInterface $router,
-                                private UrlGeneratorInterface $urlGenerator,
-                                private \Doctrine\Persistence\ManagerRegistry $managerRegistry)
+                                private readonly RouterInterface $router,
+                                private readonly UrlGeneratorInterface $urlGenerator,
+                                private readonly \Doctrine\Persistence\ManagerRegistry $managerRegistry)
     {
     }
 

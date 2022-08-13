@@ -6,49 +6,32 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\Entity(repositoryClass="App\Repository\TutorialRepository")
- */
+#[ORM\Entity(repositoryClass: \App\Repository\TutorialRepository::class)]
 class Tutorial
 {
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     */
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: 'integer')]
     private $id;
-
-    /**
-     * @ORM\Column(type="string", length=100)
-     */
+    #[ORM\Column(type: 'string', length: 100)]
     private $name;
-
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Step", mappedBy="tutorial")
-     */
+    #[ORM\OneToMany(targetEntity: \App\Entity\Step::class, mappedBy: 'tutorial')]
     private $steps;
-
     public function __construct()
     {
         $this->steps = new ArrayCollection();
     }
-
     /**
      *  @return Collection|Step[]
      */
-    public function getSteps()
+    public function getSteps(): \Doctrine\Common\Collections\Collection|array
     {
         return $this->steps;
     }
-
-    /**
-     * @param mixed $steps
-     */
-    public function setSteps($steps): void
+    public function setSteps(mixed $steps): void
     {
         $this->steps = $steps;
     }
-
     /**
      * @return mixed
      */
@@ -56,17 +39,14 @@ class Tutorial
     {
         return $this->id;
     }
-
     /**
-     * @param mixed $id
      * @return Tutorial
      */
-    public function setId($id)
+    public function setId(mixed $id)
     {
         $this->id = $id;
         return $this;
     }
-
     /**
      * @return mixed
      */
@@ -74,15 +54,12 @@ class Tutorial
     {
         return $this->name;
     }
-
     /**
-     * @param mixed $name
      * @return Tutorial
      */
-    public function setName($name)
+    public function setName(mixed $name)
     {
         $this->name = $name;
         return $this;
     }
-
 }

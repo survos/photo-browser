@@ -34,9 +34,9 @@ class AdminMenu extends BaseAdminMenu implements AdminMenuInterface
 {
     use AdminMenuTrait;
 
-    public function __construct(private AuthorizationCheckerInterface $security,
+    public function __construct(private readonly AuthorizationCheckerInterface $security,
                                 protected Environment                 $twig,
-                                private ManagerRegistry $managerRegistry,
+                                private readonly ManagerRegistry $managerRegistry,
 //                                private AppService                    $appService,
                                 protected UmbrellaAdminConfiguration  $configuration,
 //                                private WorkflowHelperService         $workflowHelper,
@@ -54,6 +54,9 @@ class AdminMenu extends BaseAdminMenu implements AdminMenuInterface
     public function buildMenu(MenuBuilder $builder, array $options)
     {
 
+        $rootMenu = null;
+        $taxMenu = null;
+        $subMenu = null;
         $options = (new OptionsResolver())
             ->setDefaults([
                 'jurisdiction' => null
@@ -64,17 +67,13 @@ class AdminMenu extends BaseAdminMenu implements AdminMenuInterface
 
         $this->addMenuItem($menu, [
             'route' => 'home',
-            'extras' => array(
-                'icon' => 'fa fa-dashboard fa-fw',
-            ),
+            'extras' => ['icon' => 'fa fa-dashboard fa-fw'],
         ]);
         return;
-        $menu->addChild('Roots', array(
-            'extras' =>
-                [
-                    'icon' => 'fa fa-chess-bishop'
-                ],
-            'route' => 'digi_kam'));
+        $menu->addChild('Roots', ['extras' =>
+            [
+                'icon' => 'fa fa-chess-bishop'
+            ], 'route' => 'digi_kam']);
 
 //        $menu->addChild('easyadmin', array(
 //            'extras' =>
