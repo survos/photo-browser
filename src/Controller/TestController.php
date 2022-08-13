@@ -2,14 +2,14 @@
 
 namespace App\Controller;
 
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 /**
  * @Route("/test")
  */
 
-class TestController extends Controller
+class TestController extends AbstractController
 {
     /**
      * @Route("/tables", name="test_tables")

@@ -1,6 +1,6 @@
-rezzza_flickr:
-    key: '%env(resolve:REZZZA_FLICKR_KEY)'
-    secret: '%env(resolve:REZZZA_FLICKR_SECRET)'
+#rezzza_flickr:
+#    key: '%env(resolve:REZZZA_FLICKR_KEY)'
+#    secret: '%env(resolve:REZZZA_FLICKR_SECRET)'
 
 #flickr:
 #    consumer_key: 5dc85891c4d74a63260b589f37a533d7

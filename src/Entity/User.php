@@ -10,6 +10,11 @@ use Symfony\Component\Security\Core\User\UserInterface;
  */
 class User implements UserInterface
 {
+    public function getUserIdentifier(): string
+    {
+        return $this->getEmail();
+    }
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()

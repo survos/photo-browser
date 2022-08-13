@@ -3,13 +3,13 @@
 namespace App\Controller;
 
 use App\Entity\Tutorial;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Finder\SplFileInfo;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class TutorialController extends Controller
+class TutorialController extends AbstractController
 {
     /**
      * @Route("/tutorial", name="tutorial")

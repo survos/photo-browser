@@ -11,15 +11,28 @@ use App\Repository\AlbumsRepository;
 use App\Repository\ImageRepository;
 use App\Service\ImageService;
 use Doctrine\DBAL\Connection;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 use WhiteOctober\BreadcrumbsBundle\Model\Breadcrumbs;
 
-class DigiKamController extends Controller
+class DigiKamController extends AbstractController
 {
+    /**
+     * @var Breadcrumbs
+     */
+    private $breadcrumbs;
+
+
+    /**
+     * DigiKamController constructor.
+     */
+    public function __construct(Breadcrumbs $breadcrumbs)
+    {
+        $this->breadcrumbs = $breadcrumbs;
+    }
 
     private function getConnection(): Connection
     {
@@ -135,8 +148,7 @@ Internal Database Server Path=
     }
 
     private function setBreadcrumbs(): Breadcrumbs {
-        $breadcrumbs = $this->get("white_october_breadcrumbs");
-
+        $breadcrumbs = $this->breadcrumbs;
         // Simple example
         $breadcrumbs->addItem("Home", $this->get("router")->generate("home"));
 
@@ -157,7 +169,7 @@ Internal Database Server Path=
 
 
     /**
-     * @Route("/", name="home")
+     * @Route("/home", name="home")
      */
     public function home(AlbumsRepository $albumsRepository, ImageRepository $imageRepository)
     {

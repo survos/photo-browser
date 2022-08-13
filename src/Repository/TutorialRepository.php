@@ -8,7 +8,7 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
 
 class TutorialRepository extends ServiceEntityRepository
 {
-    public function __construct(RegistryInterface $registry)
+    public function __construct(\Doctrine\Persistence\ManagerRegistry $registry)
     {
         parent::__construct($registry, Tutorial::class);
     }

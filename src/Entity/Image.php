@@ -11,7 +11,6 @@ use Doctrine\ORM\Mapping as ORM;
 */
 class Image extends BaseEntity
 {
-
     public function __construct()
     {
         $this->tags = new ArrayCollection();
@@ -21,21 +20,24 @@ class Image extends BaseEntity
         $this->meta = null;
     }
 
-/**
-* @ORM\Column(type="integer", name="id")
-* @ORM\Id
-* @ORM\GeneratedValue
-*/
-private $id;
+    /**
+    * @ORM\Column(type="integer", name="id")
+    * @ORM\Id
+    * @ORM\GeneratedValue
+    */
+    private $id;
 
-    public function getId() { return $this->id; }
+    public function getId()
+    {
+        return $this->id;
+    }
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Albums", inversedBy="images")
      * @ORM\JoinColumn(name="album")
      */
 
-private $album;
+    private $album;
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Tags", mappedBy="images")
@@ -45,7 +47,10 @@ private $album;
      *      )
      */
     private $tags;
-    public function getTags() { return $this->tags; }
+    public function getTags()
+    {
+        return $this->tags;
+    }
 
 
 
@@ -175,55 +180,76 @@ private $album;
     }
 
 
-    public function getAlbum(): ?Albums { return $this->album; }
+    public function getAlbum(): ?Albums
+    {
+        return $this->album;
+    }
 
-/**
-* @ORM\Column(type="string", name="name")
-*/
-private $name;
+    /**
+    * @ORM\Column(type="string", name="name")
+    */
+    private $name;
 
-    public function getName() { return $this->name; }
+    public function getName()
+    {
+        return $this->name;
+    }
 
-/**
-* @ORM\Column(type="integer", name="status")
-*/
-private $status;
+    /**
+    * @ORM\Column(type="integer", name="status")
+    */
+    private $status;
 
-    public function getStatus() { return $this->status; }
+    public function getStatus()
+    {
+        return $this->status;
+    }
 
-/**
-* @ORM\Column(type="integer", name="category")
-*/
-private $category;
+    /**
+    * @ORM\Column(type="integer", name="category")
+    */
+    private $category;
 
-    public function getCategory() { return $this->category; }
+    public function getCategory()
+    {
+        return $this->category;
+    }
 
-/**
-* @ORM\Column(type="datetime", name="modificationDate")
-*/
-private $modificationDate;
+    /**
+    * @ORM\Column(type="datetime", name="modificationDate")
+    */
+    private $modificationDate;
 
-    public function getModificationdate() { return $this->modificationDate; }
+    public function getModificationdate()
+    {
+        return $this->modificationDate;
+    }
 
-/**
-* @ORM\Column(type="integer", name="fileSize")
-*/
-private $fileSize;
+    /**
+    * @ORM\Column(type="integer", name="fileSize")
+    */
+    private $fileSize;
 
-    public function getFilesize() { return $this->fileSize; }
+    public function getFilesize()
+    {
+        return $this->fileSize;
+    }
 
-/**
-* @ORM\Column(type="text", name="uniqueHash")
-*/
-private $uniqueHash;
+    /**
+    * @ORM\Column(type="text", name="uniqueHash")
+    */
+    private $uniqueHash;
 
-    public function getUniquehash() { return $this->uniqueHash; }
+    public function getUniquehash()
+    {
+        return $this->uniqueHash;
+    }
 
 
-public function __toString(): string
-{
-      return sprintf("%d: %s", $this->getId(), $this->name);
-}
+    public function __toString(): string
+    {
+        return sprintf("%d: %s", $this->getId(), $this->name);
+    }
 
     /**
      * @return mixed
@@ -262,17 +288,18 @@ public function __toString(): string
     }
 
 
-public function getUrlPath()
-{
-    return $this->getAlbum() ? sprintf("%s/%s", $this->getAlbum()->getPath(), $this->getName()) : '#';
-}
+    public function getUrlPath()
+    {
+        return $this->getAlbum() ? sprintf("%s/%s", $this->getAlbum()->getPath(), $this->getName()) : '#';
+    }
 
     public function getFilePath()
     {
         return $this->getAlbum()->getAlbumroot()->getSpecificpath() . '/' . $this->getAlbum()->getRelativepath() . '/' . $this->getName();
     }
 
-    public function getUniqueIdentifiers() {
+    public function getUniqueIdentifiers()
+    {
         return [
             'id' => $this->getId()
         ];
@@ -313,7 +340,4 @@ public function getUrlPath()
         $this->subjects = $subjects;
         return $this;
     }
-
-
-
 }

@@ -76,7 +76,7 @@
 
 {% block icon %}
     {% if item.extra('icon') is not empty %}
-        {% spaceless %}
+        {% apply spaceless %}
             {% set icon = item.extra('icon') %}
             {% if icon|trans != icon %}
                 <i class="{{ icon|trans }}"></i>
@@ -86,7 +86,7 @@
                     <i class="fa fw {{ icon }}"></i>
                 {% endfor %}
             {% endif %}
-        {% endspaceless %}
+        {% endapply %}
     {% endif %}
     {% if item.extra('icon_badge') is not empty and item.extra('icon_badge') != '0' %}
         <em>{{ item.extra('icon_badge') }}</em>
@@ -100,16 +100,13 @@
 {% endblock %}
 
 {% block linkElement %}
-    {% spaceless %}
         <a href="{{ item.uri }}"{{ macros.attributes(item.linkAttributes) }}>
             {{ block('icon') }} <span class="menu_label">{{ block('label') }}</span>
             {{ block('counts') }}
         </a>
-    {% endspaceless %}
 {% endblock %}
 
 {% block spanElement %}
-    {% spaceless %}
 
         <a {{ macros.attributes(item.labelAttributes) }}>
             {% if item.extra('icon') is not empty %}
@@ -127,11 +124,9 @@
                 {{ block('counts') }}
         </span>
         </a>
-    {% endspaceless %}
 {% endblock %}
 
 {% block dropdownElement %}
-    {% spaceless %}
         {%- set classes = item.linkAttribute('class') is not empty ? [item.linkAttribute('class')] : [] %}
         {%- set classes = classes|merge(['dropdown-toggle']) %}
         {%- set attributes = item.linkAttributes %}
@@ -147,7 +142,6 @@
             {% set label = block('label') %}
             {% if label|default(false) %}<span>{{ label }}</span>{% endif %}{{ block('counts') }}<span class="caret"></span>
         </a>
-    {% endspaceless %}
 {% endblock %}
 
 {# This is supposedly from the base twig file, but something seems wrong with the versioning #}

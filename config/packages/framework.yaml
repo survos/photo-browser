@@ -11,7 +11,7 @@ framework:
         name:            rt
         cookie_domain:   null
         cookie_lifetime: 0
-        save_path: "%kernel.root_dir%/../var/sessions/%kernel.environment%"
+        save_path: "%kernel.project_dir%/../var/sessions/%kernel.environment%"
         gc_probability: 0
 
     #esi: true
@@ -19,9 +19,8 @@ framework:
     php_errors:
         log: true
 
-    templating: { engines: [twig] }
 
-    cache:
+#    cache:
         # Put the unique name of your app here: the prefix seed
         # is used to compute stable namespaces for cache keys.
         #prefix_seed: your_vendor_name/app_name
