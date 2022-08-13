@@ -125,6 +125,18 @@
     "knplabs/knp-menu-bundle": {
         "version": "v2.2.1"
     },
+    "knpuniversity/oauth2-client-bundle": {
+        "version": "2.10",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "main",
+            "version": "1.20",
+            "ref": "1ff300d8c030f55c99219cc55050b97a695af3f6"
+        },
+        "files": [
+            "config/packages/knpu_oauth2_client.yaml"
+        ]
+    },
     "laminas/laminas-code": {
         "version": "4.0.0"
     },
@@ -227,8 +239,26 @@
             "ref": "aaddfdf43cdecd4cf91f992052d76c2cadc04543"
         }
     },
-    "symfony/amqp-messenger": {
-        "version": "v5.2.4"
+    "stof/doctrine-extensions-bundle": {
+        "version": "1.7",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "main",
+            "version": "1.2",
+            "ref": "e805aba9eff5372e2d149a9ff56566769e22819d"
+        },
+        "files": [
+            "config/packages/stof_doctrine_extensions.yaml"
+        ]
+    },
+    "survos/base-bundle": {
+        "version": "dev-master"
+    },
+    "survos/bootstrap-bundle": {
+        "version": "dev-master"
+    },
+    "survos/core-bundle": {
+        "version": "1.0.7"
     },
     "symfony/asset": {
         "version": "v5.2.4"
@@ -277,9 +307,6 @@
     },
     "symfony/doctrine-bridge": {
         "version": "v4.0.4"
-    },
-    "symfony/doctrine-messenger": {
-        "version": "v5.2.5"
     },
     "symfony/dotenv": {
         "version": "v4.0.4"
@@ -351,6 +378,18 @@
     "symfony/lts": {
         "version": "4-dev"
     },
+    "symfony/mailer": {
+        "version": "6.1",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "main",
+            "version": "4.3",
+            "ref": "97a61eabb351d7f6cb7702039bcfe07fe9d7e03c"
+        },
+        "files": [
+            "config/packages/mailer.yaml"
+        ]
+    },
     "symfony/maker-bundle": {
         "version": "1.0",
         "recipe": {
@@ -411,9 +450,6 @@
     "symfony/polyfill-php72": {
         "version": "1.9-dev"
     },
-    "symfony/polyfill-php73": {
-        "version": "1.11-dev"
-    },
     "symfony/polyfill-php80": {
         "version": "v1.22.1"
     },
@@ -431,9 +467,6 @@
     },
     "symfony/property-info": {
         "version": "4.0.x-dev"
-    },
-    "symfony/redis-messenger": {
-        "version": "v5.2.4"
     },
     "symfony/routing": {
         "version": "6.1",
@@ -467,9 +500,6 @@
         "version": "v5.2.5"
     },
     "symfony/security-csrf": {
-        "version": "v5.2.4"
-    },
-    "symfony/security-guard": {
         "version": "v5.2.4"
     },
     "symfony/security-http": {
@@ -566,12 +596,12 @@
         }
     },
     "symfony/webpack-encore-bundle": {
-        "version": "1.9",
+        "version": "1.15",
         "recipe": {
             "repo": "github.com/symfony/recipes",
-            "branch": "master",
-            "version": "1.9",
-            "ref": "9399a0bfc6ee7a0c019f952bca46d6a6045dd451"
+            "branch": "main",
+            "version": "1.10",
+            "ref": "2e458cc7e6f1df1dad890eb104b81e4f302c9bd4"
         },
         "files": [
             "assets/app.js",
@@ -579,12 +609,21 @@
             "assets/controllers.json",
             "assets/controllers/hello_controller.js",
             "assets/styles/app.css",
-            "config/packages/assets.yaml",
-            "config/packages/prod/webpack_encore.yaml",
-            "config/packages/test/webpack_encore.yaml",
             "config/packages/webpack_encore.yaml",
             "package.json",
             "webpack.config.js"
+        ]
+    },
+    "symfony/workflow": {
+        "version": "6.1",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "main",
+            "version": "3.3",
+            "ref": "3b2f8ca32a07fcb00f899649053943fa3d8bbfb6"
+        },
+        "files": [
+            "config/packages/workflow.yaml"
         ]
     },
     "symfony/yaml": {
@@ -599,8 +638,17 @@
             "ref": "4851df0afc426b8f07204379d21fca25b6df5d68"
         }
     },
+    "twig/extra-bundle": {
+        "version": "v3.4.0"
+    },
     "twig/twig": {
         "version": "v2.4.4"
+    },
+    "umbrella2/adminbundle": {
+        "version": "v6.1"
+    },
+    "umbrella2/corebundle": {
+        "version": "v6.1"
     },
     "whiteoctober/breadcrumbs-bundle": {
         "version": "dev-master"

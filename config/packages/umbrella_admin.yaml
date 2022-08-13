@@ -1,0 +1,3 @@
+umbrella_admin:
+    app_name: DigiBrowse
+    menu: App\Menu\AdminMenu

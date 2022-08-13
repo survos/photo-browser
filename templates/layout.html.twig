@@ -1,0 +1,70 @@
+{% extends "@theme/base.html.twig" %}
+
+{#{% block navbar_search %}#}
+{#    <form action="{{ path('app_search') }}">#}
+{#        <div {{ stimulus_controller('search') }}>#}
+{#            <input {{ stimulus_action('search', 'change') }} name="q" type="search" width="30"/>#}
+{#            <input type="submit">#}
+{#        </div>#}
+{#    </form>#}
+{#{% endblock %}#}
+
+
+
+    {% block navbar %}
+        {% embed "@SurvosBase/umbrella/_navbar.html.twig" %}
+            {% block navbar_search %}
+                <form action="{{ path('app_search') }}">
+                    <input name="q" type="search" width="30"/>
+                    {% if project is defined %}
+                        <input name="projectId" value="{{ project.code }}" type="hidden">
+                    <input name="submitPlanta" type="submit" value="planta" />
+                    {% endif %}
+{#                    <input name="submitTax" type="submit" value="tax" />#}
+                </form>
+            {% endblock %}
+
+            {% block navbar_links %}
+                Hub-specific links
+            {% endblock %}
+
+
+
+            {% block navbar_profile_items %}
+            {% embed '@UmbrellaAdmin/_userinfo.html.twig' %}
+                {% block project_profile_links %}
+                    {% for membership in app.user.memberships %}
+                        <a href="{{ path('project_dashboard', membership.project) }}">{{ membership.project }}</a>
+                    {% endfor %}
+
+                    <a class="dropdown-item" href="pages-profile.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user align-middle me-1"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg> Profile</a>
+                {% endblock %}
+            {% endembed  %}
+
+                {% endblock %}
+
+
+            {% block top_bar_navbar_items %}
+
+
+                {#                <li class="nav-item">#}
+{#                    <a href="{{ path('project_index') }}">#}
+{#                        projects#}
+{#                    </a>#}
+{#                </li>#}
+            {% endblock %}
+
+            {#        {{ include("@SurvosBase/adminlte/_example_topbar.html.twig") }}#}
+            {#        {{ include("@SurvosBase/adminlte/_navbar.html.twig") }}#}
+        {% endembed %}
+    {% endblock %}
+
+
+
+{% block sidebar %}
+    {{ render_menu('App\\Menu\\AdminMenu', {
+        title: 'home',
+        template: '@SurvosBase/umbrella/Menu/sidebar.html.twig',
+    }) }}
+{% endblock %}
+

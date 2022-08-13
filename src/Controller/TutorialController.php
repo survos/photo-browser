@@ -11,15 +11,11 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class TutorialController extends AbstractController
 {
-    /**
-     * @Route("/tutorial", name="tutorial")
-     */
+    #[Route(path: '/tutorial', name: 'tutorial')]
     public function index()
     {
-
         $tutorialRoot = getenv('TUTORIAL_DIR');
         $tutorials = [];
-
         $finder = new Finder();
         /** @var SplFileInfo $file */
         foreach ($finder->in($tutorialRoot) as $file) {
