@@ -27,6 +27,7 @@
         "symfony/maker-bundle": "^1.0",
         "symfony/messenger": "^5.0",
         "symfony/monolog-bundle": "^3.6",
+        "symfony/runtime": "^5.0",
         "symfony/security-bundle": "^5.0",
         "symfony/stopwatch": "^5.0",
         "symfony/templating": "^5.0",
@@ -47,7 +48,8 @@
         },
         "sort-packages": true,
         "allow-plugins": {
-            "symfony/flex": true
+            "symfony/flex": true,
+            "symfony/runtime": true
         }
     },
     "autoload": {
