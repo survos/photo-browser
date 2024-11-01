@@ -23,3 +23,7 @@ yarn-error.log
 ###< symfony/webpack-encore-bundle ###
 
 /public/images/cache
+
+###> phpstan/phpstan ###
+phpstan.neon
+###< phpstan/phpstan ###
