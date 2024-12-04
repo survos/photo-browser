@@ -18,10 +18,12 @@
         "phpoffice/phpspreadsheet": "^1.1",
         "sensio/framework-extra-bundle": "^6.0",
         "survos/auth-bundle": "*",
-        "survos/bootstrap-bundle": "*",
+        "survos/bootstrap-bundle": "^1.5",
+        "survos/command-bundle": "^1.5",
         "survos/core-bundle": "*",
         "survos/workflow-helper-bundle": "*",
         "symfony/asset": ">= 5.4",
+        "symfony/asset-mapper": ">= 5.4",
         "symfony/console": ">= 5.4",
         "symfony/debug-bundle": ">= 5.4",
         "symfony/finder": ">= 5.4",
@@ -44,6 +46,7 @@
     },
     "require-dev": {
         "rector/rector": "^0.13.10",
+        "survos/maker-bundle": "^1.5",
         "symfony/dotenv": ">= 5.4"
     },
     "minimum-stability": "dev",
@@ -78,7 +81,8 @@
     "scripts": {
         "auto-scripts": {
             "cache:clear": "symfony-cmd",
-            "assets:install %PUBLIC_DIR%": "symfony-cmd"
+            "assets:install %PUBLIC_DIR%": "symfony-cmd",
+            "importmap:install": "symfony-cmd"
         },
         "post-install-cmd": [
             "@auto-scripts"

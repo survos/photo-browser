@@ -11,7 +11,11 @@ USE sf-7 branch!!
 
 # Requirements
 
+
+
 Configure Digikam 6 to use a MySQL (or MariaDB) database, either locally or remote.  You'll need the credentials.
+
+sqlite3 ~/Pictures/digikam4.db .schema > schema.sql
 
 
 ## Heroku Deployment
