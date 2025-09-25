@@ -1,9 +1,10 @@
 {
     "controllers": {
-        "@survos/workflow-helper-bundle": {
-            "workflow": {
+        "@survos/bootstrap-bundle": {
+            "search": {
                 "enabled": true,
-                "fetch": "eager"
+                "fetch": "lazy",
+                "autoimport": []
             }
         }
     },

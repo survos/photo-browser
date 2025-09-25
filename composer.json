@@ -21,7 +21,6 @@
         "survos/bootstrap-bundle": "^1.5",
         "survos/command-bundle": "^1.5",
         "survos/core-bundle": "*",
-        "survos/workflow-helper-bundle": "*",
         "symfony/asset": ">= 5.4",
         "symfony/asset-mapper": ">= 5.4",
         "symfony/console": ">= 5.4",
@@ -49,7 +48,7 @@
         "survos/maker-bundle": "^1.5",
         "symfony/dotenv": ">= 5.4"
     },
-    "minimum-stability": "dev",
+    "minimum-stability": "RC",
     "prefer-stable": true,
     "config": {
         "preferred-install": {
@@ -57,9 +56,10 @@
         },
         "sort-packages": true,
         "allow-plugins": {
+            "endroid/installer": true,
+            "survos/installer": true,
             "symfony/flex": true,
-            "symfony/runtime": true,
-            "endroid/installer": true
+            "symfony/runtime": true
         }
     },
     "autoload": {
@@ -96,7 +96,8 @@
     },
     "extra": {
         "symfony": {
-            "allow-contrib": true
+            "allow-contrib": true,
+            "require": "^7.3"
         }
     },
     "repositories": {
