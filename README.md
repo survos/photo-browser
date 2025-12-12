@@ -5,7 +5,7 @@ Too old, better to start with a new Symfony 7.2 project and run the app:create-d
 
 Maybe keep imageService and Flickr, maybe not.
 
-USE sf-7 branch!!
+USE sf-7 branch!!  But still uses webpack.  
 
 
 
